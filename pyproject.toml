@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "moody-backend"
+name = "vibeify-backend"
 version = "0.1.0"
 description = ""
 authors = ["SkazuHD <voda0110@gmail.com>"]
