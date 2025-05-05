@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 voyager = "^2.1.0"
 pedalboard = "^0.9.16"
+fastapi = "^0.115.12"
 
 
 [build-system]
