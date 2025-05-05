@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "vibeify-backend"
+version = "0.1.0"
+description = ""
+authors = ["SkazuHD <voda0110@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+voyager = "^2.1.0"
+pedalboard = "^0.9.16"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
