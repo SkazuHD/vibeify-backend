@@ -1,16 +1,15 @@
 [tool.poetry]
-name = "vibeify-backend"
+name = "moody-backend"
 version = "0.1.0"
 description = ""
 authors = ["SkazuHD <voda0110@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-voyager = "^2.1.0"
-pedalboard = "^0.9.16"
-fastapi = "^0.115.12"
-
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.115.12"}
+transformers = "^4.51.3"
+uvicorn = {extras = ["standard"], version = "^0.34.2"}
 
 [build-system]
 requires = ["poetry-core"]
