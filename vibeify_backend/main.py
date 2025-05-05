@@ -9,4 +9,4 @@ async def root():
 
 def start():
     """Launched with `poetry run start` at root level"""
-    uvicorn.run("moody_backend.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
