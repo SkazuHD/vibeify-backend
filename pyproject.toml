@@ -8,8 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = {extras = ["standard"], version = "^0.115.12"}
-transformers = "^4.51.3"
 uvicorn = {extras = ["standard"], version = "^0.34.2"}
+mutagen = "^1.47.0"
+firebase-admin = "^6.9.0"
 
 [build-system]
 requires = ["poetry-core"]
