@@ -6,7 +6,7 @@ authors = ["SkazuHD <voda0110@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 fastapi = {extras = ["standard"], version = "^0.115.13"}
 uvicorn = "^0.34.3"
 firebase-admin = "^6.9.0"
