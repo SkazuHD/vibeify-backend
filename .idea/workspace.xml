@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="986009ee-718a-4ed4-a8a8-6158f3762f38" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/01. Luis Fonsi - Despacito (feat. Daddy Yankee).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/02. Robin Schulz - OK (feat. James Blunt).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/03. Imagine Dragons - Thunder.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/04. DJ Khaled - Wild Thoughts (feat. Rihanna &amp; Bryson Tiller).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/05. Jonas Blue - Mama.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/06. Helene Fischer - Herzbeben.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/07. David Guetta - 2U (feat. Justin Bieber).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/08. French Montana - Unforgettable (feat. Swae Lee).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/09. Charlie Puth - Attention.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/10. Shawn Mendes - There's Nothing Holdin' Me Back.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/100. Fake Pictures - Two Princes (Radio Mix).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/11. Ed Sheeran - Shape of You.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/12. Liam Payne - Strip That Down (feat. Quavo).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/13. The Chainsmokers &amp; Coldplay - Something Just Like This.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/14. Nimo - Heute mit mir.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/15. Felix Jaehn, Hight &amp; Alex Aiono - Hot2Touch.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/16. Ofenbach - Be Mine.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/17. Enrique Iglesias - Súbeme la radio (feat. Descemer Bueno, Zion &amp; Lennox).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/18. Axwell Ingrosso - More Than You Know.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/19. DJ Khaled - I'm the One (feat. Justin Bieber, Quavo, Chance The Rapper &amp; Lil Wayne).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/20. Kay One - Louis Louis.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/21. Cro - Unendlichkeit.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/22. Alle Farben &amp; Janieck - Little Hollywood.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/23. Jason Derulo - Swalla (feat. Nicki Minaj &amp; Ty Dolla $ign).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/24. Ed Sheeran - Galway Girl.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/25. Mark Forster - Sowieso.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/26. UFO361 - Nice Girl 2.0.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/27. Burak Yeter - Tuesday (feat. Danelle Sandoval).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/28. Rita Ora - Your Song.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/29. Alice Merton - No Roots.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/30. Welshly Arms - Legendary.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/31. Maggie Lindemann - Pretty Girl.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/32. KC Rebell &amp; Summer Cem - Murcielago.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/33. Clean Bandit - Symphony (feat. Zara Larsson).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/34. Helene Fischer - Nur mit Dir.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/35. Imagine Dragons - Believer.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/36. Harry Styles - Sign of the Times.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/37. Galantis - Hunter.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/38. Gestört aber GeiL feat. Lea - Wohin willst du.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/39. Martin Garrix &amp; Troye Sivan - There For You.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/40. Calvin Harris - Feels (feat. Pharrell Williams, Katy Perry &amp; Big Sean).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/41. Kygo &amp; Selena Gomez - It Ain't Me.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/42. Capo - Lambo Diablo GT (feat. Nimo).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/43. Future - Mask Off.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/44. Adel Tawil - Ist da jemand.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/45. Cheat Codes - No Promises (feat. Demi Lovato).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/46. Miley Cyrus - Malibu.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/47. Major Lazer - Know No Better (feat. Travis Scott, Camila Cabello &amp; Quavo).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/48. Kygo &amp; Ellie Goulding - First Time.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/49. Jax Jones - You Don't Know Me (feat. Raye).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/50. Drake - Signs.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/51. Kurdo - Ya Salam.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/52. Micar - Burden Down.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/53. Zedd &amp; Alessia Cara - Stay.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/54. Camila Cabello - Crying in the Club.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/55. KC Rebell &amp; Summer Cem - Nicht jetzt.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/56. Bonez MC &amp; Raf Camora - Ohne mein Team (feat. Maxwell).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/57. Bushido - Papa.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/58. Raf Camora &amp; Bonez MC feat. Gzuz &amp; Maxwell - Kontrollieren.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/59. Alma - Chasing Highs.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/60. Mert - Ajajaj (feat. Soolking).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/61. Capital Bra - Nur noch Gucci.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/62. OneRepublic - No Vacancy.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/63. Anne-Marie - Ciao Adios.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/64. Amanda - Blau (feat. Sido).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/65. Zuna - Nummer 1 (feat. Azet &amp; Noizy).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/66. Katy Perry - Bon Appetit.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/67. Selena Gomez - Bad Liar.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/68. Nimo - LFR.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/69. Alan Walker - Tired (feat. Gavin James).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/70. Rin - Bros.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/71. Nimo - Wie Falco (feat. Ufo361 &amp; Yung Hurn).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/72. Kendrick Lamar - HUMBLE..mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/73. KC Rebell - Voll mein Ding (feat. Adel Tawil).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/74. Calvin Harris - Slide.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/75. Ed Sheeran - Castle on the Hill.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/76. Andreas Gabalier - Hulapalu (MTV Unplugged) (feat. 257ers).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/77. Wincent Weiss - Feuerwerk.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/78. Gentelmen - mOvaload (feat. Sean Paul).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/79. PA Sports feat. RAF Camora &amp; Bonez MC - Sie will.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/80. Lil Uzi Vert - XO TOUR Llif3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/81. Martin Jensen - Solo Dance.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/82. Sigala &amp; Ella Eyre - Came Here For Love.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/83. Starley - Call On Me.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/84 Mark Forster - Chöre.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/85. Rag'n'Bone Man - Skin.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/86. Martin Garrix &amp; Dua Lipa - Scared To Be Lonely.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/87. KC Rebell - Tabasco.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/88. Maître Gims - Loin (feat. Dany Synthé).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/89. Bonez MC &amp; RAF Camora - Palmen aus Plastik.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/90. Post Malone - Congratulations (feat. Quavo).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/91. Clean Bandit - Rockabye (feat. Sean Paul &amp; Anne-Marie).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/92. Niall Horan - Slow Hands.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/93. G-Eazy &amp; Kehlani - Good Life.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/94. Julia Michaels - Issues.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/95. AJR - Weak.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/96. Marteria - Das Geld muss weg.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/97. J Balvin - Mi Gente.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/98. Lady GaGa - The Cure.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/99. Jon Bellion - All Time Low.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serviceAccountKey.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vibeify-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vibeify-backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vibeify_backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/vibeify_backend/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SkazuHD&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SkazuHD/vibeify-backend",
+    "accountId": "eddb987c-d00a-4eda-997e-3357b996dda6"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2z0NDKjaEIOMnHFKJKA6H6jfbek" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "/home/skazu/hsb/vibeify-backend/media",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Merge Requests" />
+      <window_info id="Backup and Sync History" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="Pull Requests" />
+      <window_info id="Learn" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5003759" weight="0.3298828" />
+      <window_info id="Structure" order="2" sideWeight="0.49962407" side_tool="true" weight="0.3298828" />
+      <window_info active="true" id="Commit" order="3" visible="true" weight="0.3298828" />
+      <window_info id="Welcome to GitHub Copilot" order="4" />
+      <window_info id="Bookmarks" order="5" sideWeight="0.49962407" side_tool="true" weight="0.3298828" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="File Transfer" />
+      <window_info anchor="bottom" id="HfCacheToolWindow" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="bottom" id="GitHub Copilot MCP Log" order="5" />
+      <window_info anchor="bottom" id="Python Packages" order="6" weight="0.1" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.1" />
+      <window_info anchor="right" id="Endpoints" />
+      <window_info anchor="right" id="Coverage" side_tool="true" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Jupyter Variables" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+      <window_info anchor="right" id="Plots" order="5" weight="0.1" />
+      <window_info anchor="right" id="github.copilotToolWindow" order="6" />
+      <window_info anchor="right" id="GitHub Copilot Chat" order="7" weight="0.3298828" />
+    </layout>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PY-251.26094.141" />
+        <option value="bundled-python-sdk-9f8e2b94138c-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26094.141" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="986009ee-718a-4ed4-a8a8-6158f3762f38" name="Changes" comment="" />
+      <created>1750863910798</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750863910798</updated>
+      <workItem from="1750863912419" duration="25000" />
+      <workItem from="1750863954215" duration="57000" />
+      <workItem from="1750864074756" duration="57000" />
+      <workItem from="1750864358178" duration="311000" />
+      <workItem from="1750865733536" duration="203000" />
+      <workItem from="1750865967103" duration="821000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
