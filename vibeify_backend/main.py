@@ -82,6 +82,7 @@ def scan_and_upload(base_dir="media"):
 
         except Exception as e:
             print(f"❌ Error processing {file_path}: {e}")
+    print( "📡 Media scan complete!")
 
 @app.get("/", response_model=dict)
 async def root():
