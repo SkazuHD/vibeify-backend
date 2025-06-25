@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="986009ee-718a-4ed4-a8a8-6158f3762f38" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="986009ee-718a-4ed4-a8a8-6158f3762f38" name="Changes" comment="index songs and upload to firebase">
       <change afterPath="$PROJECT_DIR$/media/01. Luis Fonsi - Despacito (feat. Daddy Yankee).mp3" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/media/02. Robin Schulz - OK (feat. James Blunt).mp3" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/media/03. Imagine Dragons - Thunder.mp3" afterDir="false" />
@@ -107,12 +106,8 @@
       <change afterPath="$PROJECT_DIR$/media/98. Lady GaGa - The Cure.mp3" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/media/99. Jon Bellion - All Time Low.mp3" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/serviceAccountKey.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vibeify-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vibeify-backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vibeify_backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/vibeify_backend/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -224,11 +219,24 @@
       <workItem from="1750864074756" duration="57000" />
       <workItem from="1750864358178" duration="311000" />
       <workItem from="1750865733536" duration="203000" />
-      <workItem from="1750865967103" duration="821000" />
+      <workItem from="1750865967103" duration="1526000" />
     </task>
+    <task id="LOCAL-00001" summary="index songs and upload to firebase">
+      <option name="closed" value="true" />
+      <created>1750867061459</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750867061459</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="index songs and upload to firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="index songs and upload to firebase" />
   </component>
 </project>

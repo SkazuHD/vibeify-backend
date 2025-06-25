@@ -3,6 +3,7 @@ import os
 import uuid
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import quote
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
@@ -18,6 +19,9 @@ cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 COLLECTION = "songs"
+
+BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
+
 
 SONG_DB = {}  # song_id -> file_path
 
@@ -43,14 +47,15 @@ def extract_metadata(file_path: str) -> dict:
         except:
             return None
 
+    song_id = generate_stable_id(file_path)
     return {
-        "id": generate_stable_id(file_path),
+        "id": song_id,
         "name": get("TIT2") or os.path.basename(file_path),
         "artist": get("TPE1"),
         "album": get("TALB"),
         "genre": get("TCON"),
         "imageUrl": None,
-        "filePath": str(file_path),
+        "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
         "duration": duration
     }
 

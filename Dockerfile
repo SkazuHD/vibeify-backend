@@ -6,4 +6,6 @@ COPY . .
 
 RUN poetry install
 
+EXPOSE 8000
+
 ENTRYPOINT ["poetry", "run", "fastapi", "run", "vibeify_backend/"]
