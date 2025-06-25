@@ -64,7 +64,7 @@ def scan_and_upload(base_dir="media"):
     base = Path(base_dir)
     songs_ref = db.collection(COLLECTION)
 
-    for file in base.rglob("songs/*.mp3"):
+    for file in base.rglob("*.mp3"):
         file_path = str(file)
         try:
             song_id = generate_stable_id(file_path)
