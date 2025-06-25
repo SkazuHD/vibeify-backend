@@ -139,6 +139,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
@@ -169,10 +170,10 @@
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
       <window_info anchor="bottom" id="HfCacheToolWindow" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.33035713" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.33035713" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="GitHub Copilot MCP Log" order="5" />
       <window_info anchor="bottom" id="Python Packages" order="6" weight="0.1" />
@@ -216,7 +217,7 @@
       <workItem from="1750864074756" duration="57000" />
       <workItem from="1750864358178" duration="311000" />
       <workItem from="1750865733536" duration="203000" />
-      <workItem from="1750865967103" duration="1831000" />
+      <workItem from="1750865967103" duration="2468000" />
     </task>
     <task id="LOCAL-00001" summary="index songs and upload to firebase">
       <option name="closed" value="true" />
@@ -242,11 +243,30 @@
       <option name="project" value="LOCAL" />
       <updated>1750867792525</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="index songs and upload to firebase">
+      <option name="closed" value="true" />
+      <created>1750867832282</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750867832282</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="index songs and upload to firebase" />

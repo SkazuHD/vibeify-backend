@@ -62,14 +62,26 @@ def extract_metadata(file_path: str) -> dict:
 def scan_and_upload(base_dir="media"):
     print("📡 Scanning media directory...")
     base = Path(base_dir)
-    for file in base.rglob("*.mp3"):
+    songs_ref = db.collection(COLLECTION)
+
+    for file in base.rglob("songs/*.mp3"):
+        file_path = str(file)
         try:
-            metadata = extract_metadata(str(file))
-            SONG_DB[metadata["id"]] = str(file)
-            db.collection(COLLECTION).document(metadata["id"]).set(metadata)
-            print(f"✅ Uploaded {metadata['name']}")
+            song_id = generate_stable_id(file_path)
+
+            # 🔍 Check if already in Firestore
+            if songs_ref.document(song_id).get().exists:
+                print(f"⏩ Skipping already uploaded: {file_path}")
+                SONG_DB[song_id] = file_path  # still add to local cache!
+                continue
+
+            metadata = extract_metadata(file_path)
+            SONG_DB[song_id] = file_path
+            songs_ref.document(song_id).set(metadata)
+            print(f"✅ Uploaded new: {metadata['name']}")
+
         except Exception as e:
-            print(f"❌ Error processing {file}: {e}")
+            print(f"❌ Error processing {file_path}: {e}")
 
 @app.get("/", response_model=dict)
 async def root():
