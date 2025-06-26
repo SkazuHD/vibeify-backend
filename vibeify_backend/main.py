@@ -10,7 +10,7 @@ from urllib.parse import quote
 
 import uvicorn
 import io
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 from fastapi.responses import FileResponse
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, ID3NoHeaderError
