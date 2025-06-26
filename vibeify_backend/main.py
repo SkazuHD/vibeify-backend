@@ -33,12 +33,25 @@ def generate_stable_id(file_path):
     hasher = hashlib.sha1()
     with open(file_path, "rb") as f:
         while chunk := f.read(8192):
+            hasher.update(chunk)
+    return hasher.hexdigest()
+        
+def extract_metadata(file_path: str) -> dict:
+    audio = MP3(file_path)
+    duration = int(audio.info.length)
+
+    try:
+        tags = ID3(file_path)
+    except ID3NoHeaderError:
+        tags = {}
+
+    def get(tag):
+        try:
             return tags.get(tag).text[0]
         except:
             return None
         
-
-    song_id = generate_stable_id(file_path)
+    print(song_id)
     return {
         "id": song_id,
         "name": get("TIT2") or os.path.basename(file_path),
@@ -63,7 +76,7 @@ def scan_and_upload(base_dir="media"):
 
             # 🔍 Check if already in Firestore
             if songs_ref.document(song_id).get().exists:
-                print(f"⏩ Skipping already uploaded: {file_path}")
+                print(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
                 SONG_DB[song_id] = file_path  # still add to local cache!
                 continue
 
