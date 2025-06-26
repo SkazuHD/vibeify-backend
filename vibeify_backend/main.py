@@ -5,8 +5,12 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
 
+
+
+
 import uvicorn
-from fastapi import FastAPI, HTTPException
+import io
+from fastapi import FastAPI, HTTPException, Response
 from fastapi.responses import FileResponse
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, ID3NoHeaderError
@@ -47,7 +51,9 @@ def extract_metadata(file_path: str) -> dict:
         except:
             return None
 
+
     song_id = generate_stable_id(file_path)
+    print(song_id)
     return {
         "id": song_id,
         "name": get("TIT2") or os.path.basename(file_path),
@@ -55,6 +61,7 @@ def extract_metadata(file_path: str) -> dict:
         "album": get("TALB"),
         "genre": get("TCON"),
         "imageUrl": None,
+        "imageUrl": f"{BASE_URL}/cover/{quote(song_id)}",
         "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
         "duration": duration
     }
@@ -72,6 +79,7 @@ def scan_and_upload(base_dir="media"):
             # 🔍 Check if already in Firestore
             if songs_ref.document(song_id).get().exists:
                 print(f"⏩ Skipping already uploaded: {file_path}")
+                print(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
                 SONG_DB[song_id] = file_path  # still add to local cache!
                 continue
 
@@ -88,6 +96,24 @@ def scan_and_upload(base_dir="media"):
 async def root():
     return {"message": "Vibeify API is healthy!",
             "date": datetime.isoformat(datetime.today())}
+
+
+@app.get("/cover/{song_id}")
+def get_cover(song_id: str):
+    path = SONG_DB.get(song_id)
+    if not path or not os.path.isfile(path):
+        raise HTTPException(status_code=404, detail="Song not found")
+
+    try:
+        tags = ID3(path)
+        apic = tags.get("APIC:")
+        if apic:
+            return Response(content=apic.data, media_type=apic.mime or "image/jpeg")
+        else:
+            return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+    except Exception as e:
+        print(f"Could not get image for {song_id}: {e}")
+        return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
 
 @app.get("/stream/{song_id}")
 def stream_song(song_id: str):
