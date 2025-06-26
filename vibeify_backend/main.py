@@ -5,7 +5,11 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
 
+
+
+
 import uvicorn
+import io
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from mutagen.mp3 import MP3
@@ -29,23 +33,10 @@ def generate_stable_id(file_path):
     hasher = hashlib.sha1()
     with open(file_path, "rb") as f:
         while chunk := f.read(8192):
-            hasher.update(chunk)
-    return hasher.hexdigest()
-
-def extract_metadata(file_path: str) -> dict:
-    audio = MP3(file_path)
-    duration = int(audio.info.length)
-
-    try:
-        tags = ID3(file_path)
-    except ID3NoHeaderError:
-        tags = {}
-
-    def get(tag):
-        try:
             return tags.get(tag).text[0]
         except:
             return None
+        
 
     song_id = generate_stable_id(file_path)
     return {
@@ -55,6 +46,7 @@ def extract_metadata(file_path: str) -> dict:
         "album": get("TALB"),
         "genre": get("TCON"),
         "imageUrl": None,
+        "imageUrl": f"{BASE_URL}/cover/{quote(song_id)}",
         "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
         "duration": duration
     }
@@ -89,6 +81,24 @@ async def root():
     return {"message": "Vibeify API is healthy!",
             "date": datetime.isoformat(datetime.today())}
 
+
+@app.get("/cover/{song_id}")
+def get_cover(song_id: str):
+    path = SONG_DB.get(song_id)
+    if not path or not os.path.isfile(path):
+        raise HTTPException(status_code=404, detail="Song not found")
+
+    try:
+        tags = ID3(path)
+        apic = tags.get("APIC:")
+        if apic:
+            return FileResponse(io.BytesIO(apic.data), media_type=apic.mime or "image/jpeg")
+        else:
+            return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+    except Exception as e:
+        print(f"Could not get image for {song_id}: {e}")
+        return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+    
 @app.get("/stream/{song_id}")
 def stream_song(song_id: str):
     path = SONG_DB.get(song_id)
