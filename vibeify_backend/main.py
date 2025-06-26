@@ -108,7 +108,7 @@ def get_cover(song_id: str):
         tags = ID3(path)
         apic = tags.get("APIC:")
         if apic:
-            return FileResponse(io.BytesIO(apic.data), media_type=apic.mime or "image/jpeg")
+            return Response(content=apic.data, media_type=apic.mime or "image/jpeg")
         else:
             return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
     except Exception as e:
