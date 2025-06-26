@@ -110,10 +110,10 @@ def get_cover(song_id: str):
         if apic:
             return Response(content=apic.data, media_type=apic.mime or "image/jpeg")
         else:
-            return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+            return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
     except Exception as e:
         print(f"Could not get image for {song_id}: {e}")
-        return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+        return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
 
 @app.get("/stream/{song_id}")
 def stream_song(song_id: str):
