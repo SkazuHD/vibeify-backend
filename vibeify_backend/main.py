@@ -35,7 +35,7 @@ def generate_stable_id(file_path):
         while chunk := f.read(8192):
             hasher.update(chunk)
     return hasher.hexdigest()
-        
+
 def extract_metadata(file_path: str) -> dict:
     audio = MP3(file_path)
     duration = int(audio.info.length)
@@ -50,7 +50,9 @@ def extract_metadata(file_path: str) -> dict:
             return tags.get(tag).text[0]
         except:
             return None
-        
+
+
+    song_id = generate_stable_id(file_path)
     print(song_id)
     return {
         "id": song_id,
@@ -76,6 +78,7 @@ def scan_and_upload(base_dir="media"):
 
             # 🔍 Check if already in Firestore
             if songs_ref.document(song_id).get().exists:
+                print(f"⏩ Skipping already uploaded: {file_path}")
                 print(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
                 SONG_DB[song_id] = file_path  # still add to local cache!
                 continue
@@ -111,7 +114,7 @@ def get_cover(song_id: str):
     except Exception as e:
         print(f"Could not get image for {song_id}: {e}")
         return {"imageUrl": "https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
-    
+
 @app.get("/stream/{song_id}")
 def stream_song(song_id: str):
     path = SONG_DB.get(song_id)
