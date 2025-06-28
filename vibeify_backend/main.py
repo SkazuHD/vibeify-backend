@@ -25,7 +25,7 @@ db = firestore.client()
 COLLECTION = "songs"
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
-
+FALLBACK_IMAGE_PATH = "assets/albumart.jpg"
 
 SONG_DB = {}  # song_id -> file_path
 
@@ -102,7 +102,7 @@ async def root():
 def get_cover(song_id: str):
     path = SONG_DB.get(song_id)
     if not path or not os.path.isfile(path):
-        raise HTTPException(status_code=404, detail="Song not found")
+        return _get_fallback_image()
 
     try:
         tags = ID3(path)
@@ -110,10 +110,19 @@ def get_cover(song_id: str):
         if apic:
             return Response(content=apic.data, media_type=apic.mime or "image/jpeg")
         else:
-            return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+            # No cover art tag, return fallback image
+            return _get_fallback_image()
     except Exception as e:
         print(f"Could not get image for {song_id}: {e}")
-        return {"https://s3.amazonaws.com/static.tumblr.com/jn9hrij/20Ul2zzsr/albumart.jpg"}
+        return _get_fallback_image()
+
+
+def _get_fallback_image():
+    if not os.path.isfile(FALLBACK_IMAGE_PATH):
+        raise HTTPException(status_code=500, detail="Fallback image not found")
+    with open(FALLBACK_IMAGE_PATH, "rb") as f:
+        data = f.read()
+    return Response(content=data, media_type="image/jpeg")
 
 @app.get("/stream/{song_id}")
 def stream_song(song_id: str):
