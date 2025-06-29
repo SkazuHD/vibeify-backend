@@ -91,7 +91,19 @@ async def upload_profile_picture(user_id: str, file: UploadFile = File(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
-    
+
+
+def init_picture_db():
+    """Initialize the profile picture database from existing files"""
+    global PFP_DB
+    PFP_DB = {}
+    if not os.path.exists(PROFILE_PICTURES_DIR):
+        return
+    for file in Path(PROFILE_PICTURES_DIR).glob("*.*"):
+        user_id = file.stem
+        PFP_DB[user_id] = str(file)
+        print(f"Loaded profile picture for {user_id}: {file}")
+
 
 def scan_and_upload(base_dir="media"):
     print("📡 Scanning media directory...")
@@ -118,10 +130,6 @@ def scan_and_upload(base_dir="media"):
         except Exception as e:
             print(f"❌ Error processing {file_path}: {e}")
     print( "📡 Media scan complete!")
-
-@app.get("/picture/{user_id}", response_model=str)
-def get_profile_picture(user_id: str):
-    return PFP_DB.get(user_id, "")
 
 
 @app.get("/", response_model=dict)
@@ -177,9 +185,11 @@ def stream_song(song_id: str):
 @app.on_event("startup")
 def on_startup():
     scan_and_upload()
+    init_picture_db()
 
 def start():
     scan_and_upload()
+    init_picture_db()
     """Launched with `poetry run start` at root level"""
     uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
 
