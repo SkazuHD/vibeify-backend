@@ -1,5 +1,6 @@
 import hashlib
 import os
+import shutil
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -10,7 +11,7 @@ from urllib.parse import quote
 
 import uvicorn
 import io
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Response, UploadFile, File
 from fastapi.responses import FileResponse
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, ID3NoHeaderError
@@ -26,8 +27,10 @@ COLLECTION = "songs"
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
 FALLBACK_IMAGE_PATH = "assets/albumart.jpg"
+PROFILE_PICTURES_DIR = "profile_pictures"
 
 SONG_DB = {}  # song_id -> file_path
+PFP_DB = {}  # user_id -> file_path
 
 def generate_stable_id(file_path):
     hasher = hashlib.sha1()
@@ -66,6 +69,30 @@ def extract_metadata(file_path: str) -> dict:
         "duration": duration
     }
 
+@app.post("/upload/profile-picture/{user_id}")
+async def upload_profile_picture(user_id: str, file: UploadFile = File(...)):
+    """Upload a profile picture for a user"""
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File must be an image")
+    os.makedirs(PROFILE_PICTURES_DIR, exist_ok=True)
+    extension = ".jpg"  
+    if "png" in file.content_type:
+        extension = ".png"
+    file_path = os.path.join(PROFILE_PICTURES_DIR, f"{user_id}{extension}")
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer) 
+        PFP_DB[user_id] = file_path
+        return {
+            "message": "Profile picture uploaded successfully",
+            "user_id": user_id,
+            "file_path": file_path,
+            "image_url": f"{BASE_URL}/picture/{user_id}"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
+    
+
 def scan_and_upload(base_dir="media"):
     print("📡 Scanning media directory...")
     base = Path(base_dir)
@@ -92,6 +119,11 @@ def scan_and_upload(base_dir="media"):
             print(f"❌ Error processing {file_path}: {e}")
     print( "📡 Media scan complete!")
 
+@app.get("/picture/{user_id}", response_model=str)
+def get_profile_picture(user_id: str):
+    return PFP_DB.get(user_id, "")
+
+
 @app.get("/", response_model=dict)
 async def root():
     return {"message": "Vibeify API is healthy!",
@@ -115,6 +147,17 @@ def get_cover(song_id: str):
     except Exception as e:
         print(f"Could not get image for {song_id}: {e}")
         return _get_fallback_image()
+    
+    
+@app.get("/picture/{user_id}")
+def get_profile_picture(user_id : str):
+    path = PFP_DB.get(user_id)
+    if not path or not os.path.isfile(path):
+        return ""
+
+    with open(path, "rb") as f:
+        data = f.read()
+    return Response(content=data, media_type="image/jpeg")
 
 
 def _get_fallback_image():
@@ -139,3 +182,4 @@ def start():
     scan_and_upload()
     """Launched with `poetry run start` at root level"""
     uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
+
