@@ -27,10 +27,17 @@ COLLECTION = "songs"
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
 FALLBACK_IMAGE_PATH = "assets/albumart.jpg"
+PLAYLIST_FALLBACK = "assets/playlist_fallback.png"
+LIKED_PLAYLIST_FALLBACK = "assets/liked_playlist_fallback.png"
 PROFILE_PICTURES_DIR = "profile_pictures"
+PLAYLIST_PICTURE_DIR = "covers"
+
+LIKED_PLAYLIST_ID = "liked_songs_virtual_playlist"  # Special ID for liked songs playlist
 
 SONG_DB = {}  # song_id -> file_path
 PFP_DB = {}  # user_id -> file_path
+COVER_DB = {}  # song_id -> cover_path
+
 
 def generate_stable_id(file_path):
     hasher = hashlib.sha1()
@@ -90,6 +97,41 @@ async def upload_profile_picture(user_id: str, file: UploadFile = File(...)):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to upload file: {str(e)}")
+    
+
+@app.post("/upload/cover/{playlist_id}")
+async def upload_cover(playlist_id: str, file: UploadFile = File(...)):
+    """Upload a cover image for a playlist"""
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File must be an image")
+    os.makedirs(PLAYLIST_PICTURE_DIR, exist_ok=True)
+    extension = ".jpg"  
+    if "png" in file.content_type:
+        extension = ".png"
+    file_path = os.path.join(PLAYLIST_PICTURE_DIR, f"{playlist_id}{extension}")
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer) 
+        COVER_DB[playlist_id] = file_path
+        return {
+            "message": "Cover uploaded successfully",
+            "playlist_id": playlist_id,
+            "file_path": file_path,
+            "image_url": f"{BASE_URL}/cover/{quote(playlist_id)}"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload cover: {str(e)}")
+    
+def init_cover_db():
+    """Initialize the cover database from existing files"""
+    global COVER_DB
+    COVER_DB = {}
+    if not os.path.exists(PLAYLIST_PICTURE_DIR):
+        return
+    for file in Path(PLAYLIST_PICTURE_DIR).glob("*.*"):
+        playlist_id = file.stem
+        COVER_DB[playlist_id] = str(file)
+        print(f"Loaded cover for {playlist_id}: {file}")
 
 
 def init_picture_db():
@@ -165,11 +207,35 @@ def get_profile_picture(user_id : str):
         data = f.read()
     return Response(content=data, media_type="image/jpeg")
 
+@app.get("/cover/playlist/{playlist_id}")
+def get_playlist_cover(playlist_id: str):
+    path = COVER_DB.get(playlist_id)
+    if playlist_id == LIKED_PLAYLIST_ID:
+        return _get_liked_playlist_cover()
+    if not path or not os.path.isfile(path):
+        return _get_playlist_fallback_image()
+    with open(path, "rb") as f:
+        data = f.read()
+    return Response(content=data, media_type="image/jpeg")
 
 def _get_fallback_image():
     if not os.path.isfile(FALLBACK_IMAGE_PATH):
         raise HTTPException(status_code=500, detail="Fallback image not found")
     with open(FALLBACK_IMAGE_PATH, "rb") as f:
+        data = f.read()
+    return Response(content=data, media_type="image/jpeg")
+
+def _get_playlist_fallback_image():
+    if not os.path.isfile(PLAYLIST_FALLBACK):
+        raise HTTPException(status_code=500, detail="Fallback image not found")
+    with open(PLAYLIST_FALLBACK, "rb") as f:
+        data = f.read()
+    return Response(content=data, media_type="image/jpeg")
+
+def _get_liked_playlist_cover():
+    if not os.path.isfile(PLAYLIST_FALLBACK):
+        raise HTTPException(status_code=500, detail="Fallback image not found")
+    with open(PLAYLIST_FALLBACK, "rb") as f:
         data = f.read()
     return Response(content=data, media_type="image/jpeg")
 
@@ -184,10 +250,12 @@ def stream_song(song_id: str):
 def on_startup():
     scan_and_upload()
     init_picture_db()
+    init_cover_db()
 
 def start():
     scan_and_upload()
     init_picture_db()
+    init_cover_db()
     """Launched with `poetry run start` at root level"""
     uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
 
