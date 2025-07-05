@@ -78,7 +78,6 @@ def extract_metadata(file_path: str) -> dict:
         "album": get("TALB"),
         "genre": get("TCON"),
         "year": str(get("TDRC")) if get("TDRC") else None,
-        "imageUrl": None,
         "imageUrl": f"{BASE_URL}/cover/{quote(song_id)}",
         "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
         "duration": duration
@@ -234,10 +233,10 @@ def get_cover(song_id: str):
     
     
 @app.get("/picture/{user_id}")
-def get_profile_picture(user_id : str):
+def get_profile_picture(user_id: str):
     path = PFP_DB.get(user_id)
     if not path or not os.path.isfile(path):
-        return ""
+        raise HTTPException(status_code=404, detail="Profile picture not found")
 
     with open(path, "rb") as f:
         data = f.read()
@@ -271,7 +270,7 @@ def _get_playlist_fallback_image():
 def _get_liked_playlist_cover():
     if not os.path.isfile(LIKED_PLAYLIST_FALLBACK):
         raise HTTPException(status_code=500, detail="Fallback image not found")
-    with open(PLAYLIST_FALLBACK, "rb") as f:
+    with open(LIKED_PLAYLIST_FALLBACK, "rb") as f:
         data = f.read()
     return Response(content=data, media_type="image/jpeg")
 
