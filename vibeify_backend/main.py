@@ -77,7 +77,7 @@ def extract_metadata(file_path: str) -> dict:
         "artist": get("TPE1"),
         "album": get("TALB"),
         "genre": get("TCON"),
-        "year": get("TDRC"),
+        "year": str(get("TDRC")) if get("TDRC") else None,
         "imageUrl": None,
         "imageUrl": f"{BASE_URL}/cover/{quote(song_id)}",
         "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
