@@ -203,7 +203,7 @@ def scan_and_upload(base_dir="media"):
 
         except Exception as e:
             error_count += 1
-            print(f"❌ Error processing {file_path}: {e}")
+            print_d(f"❌ Error processing {file_path}: {e}")
 
     print(f"📡 Media scan complete! Uploaded: {uploaded_count}, Skipped: {skipped_count}, Errors: {error_count}")
 
