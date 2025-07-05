@@ -26,8 +26,10 @@ db = firestore.client()
 COLLECTION = "songs"
 
 
-
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
+DEBUG = os.getenv("DEBUG", "false").lower() in ("true", "1", "yes")
+FORCE = os.getenv("FORCE", "false").lower() in ("true", "1", "yes")
+
 FALLBACK_IMAGE_PATH = "assets/albumart.jpg"
 PLAYLIST_FALLBACK = "assets/playlist_default.png"
 LIKED_PLAYLIST_FALLBACK = "assets/liked_playlist.png"
@@ -40,6 +42,10 @@ SONG_DB = {}  # song_id -> file_path
 PFP_DB = {}  # user_id -> file_path
 COVER_DB = {}  # song_id -> cover_path
 
+
+def print_d(*args, **kwargs):
+    if DEBUG:
+        print(*args, **kwargs)
 
 def generate_stable_id(file_path):
     hasher = hashlib.sha1()
@@ -71,6 +77,7 @@ def extract_metadata(file_path: str) -> dict:
         "artist": get("TPE1"),
         "album": get("TALB"),
         "genre": get("TCON"),
+        "year": get("TDRC"),
         "imageUrl": None,
         "imageUrl": f"{BASE_URL}/cover/{quote(song_id)}",
         "filePath": f"{BASE_URL}/stream/{quote(song_id)}",
@@ -133,7 +140,7 @@ def init_cover_db():
     for file in Path(PLAYLIST_PICTURE_DIR).glob("*.*"):
         playlist_id = file.stem
         COVER_DB[playlist_id] = str(file)
-        print(f"Loaded cover for {playlist_id}: {file}")
+        print_d(f"Loaded cover for {playlist_id}: {file}")
 
 
 def init_picture_db():
@@ -145,11 +152,11 @@ def init_picture_db():
     for file in Path(PROFILE_PICTURES_DIR).glob("*.*"):
         user_id = file.stem
         PFP_DB[user_id] = str(file)
-        print(f"Loaded profile picture for {user_id}: {file}")
+        print_d(f"Loaded profile picture for {user_id}: {file}")
 
 
 def scan_and_upload(base_dir="media"):
-    print("📡 Scanning media directory...")
+    print_d("📡 Scanning media directory...")
     base = Path(base_dir)
     songs_ref = db.collection(COLLECTION)
 
@@ -158,20 +165,22 @@ def scan_and_upload(base_dir="media"):
         try:
             song_id = generate_stable_id(file_path)
 
-            # 🔍 Check if already in Firestore
-            if songs_ref.document(song_id).get().exists:
-                print(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
+            # 🔍 Check if already in Firestore (skip if FORCE is disabled)
+            if not FORCE and songs_ref.document(song_id).get().exists:
+                print_d(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
                 SONG_DB[song_id] = file_path  # still add to local cache!
                 continue
 
             metadata = extract_metadata(file_path)
             SONG_DB[song_id] = file_path
-            songs_ref.document(song_id).set(metadata)
-            print(f"✅ Uploaded new: {metadata['name']}")
+            
+            if FORCE:
+                songs_ref.document(song_id).set(metadata)
+                print_d(f"🔄 Force updated: {metadata['name']}")
 
         except Exception as e:
-            print(f"❌ Error processing {file_path}: {e}")
-    print( "📡 Media scan complete!")
+            print_d(f"❌ Error processing {file_path}: {e}")
+    print_d( "📡 Media scan complete!")
 
 
 @app.get("/", response_model=dict)
@@ -195,7 +204,7 @@ def get_cover(song_id: str):
             # No cover art tag, return fallback image
             return _get_fallback_image()
     except Exception as e:
-        print(f"Could not get image for {song_id}: {e}")
+        print_d(f"Could not get image for {song_id}: {e}")
         return _get_fallback_image()
     
     
@@ -250,14 +259,41 @@ def stream_song(song_id: str):
 
 @app.on_event("startup")
 def on_startup():
+    if not FORCE:
+        load_existing_songs_from_firestore()
     scan_and_upload()
     init_picture_db()
     init_cover_db()
 
 def start():
+    if not FORCE:
+        load_existing_songs_from_firestore()
     scan_and_upload()
     init_picture_db()
     init_cover_db()
     """Launched with `poetry run start` at root level"""
     uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
+
+def load_existing_songs_from_firestore():
+    """Load existing songs from Firestore into local cache without re-uploading"""
+    print_d("📥 Loading existing songs from Firestore...")
+    songs_ref = db.collection(COLLECTION)
+    docs = songs_ref.stream()
+    
+    count = 0
+    for doc in docs:
+        song_data = doc.to_dict()
+        song_id = doc.id
+        
+        # Try to find the local file path
+        # This is a simple approach - you might want to improve this based on your file structure
+        base = Path("media")
+        for file in base.rglob("*.mp3"):
+            file_path = str(file)
+            if generate_stable_id(file_path) == song_id:
+                SONG_DB[song_id] = file_path
+                count += 1
+                break
+    
+    print_d(f"📥 Loaded {count} existing songs from Firestore")
 
