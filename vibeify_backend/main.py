@@ -25,10 +25,12 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 COLLECTION = "songs"
 
+
+
 BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
 FALLBACK_IMAGE_PATH = "assets/albumart.jpg"
-PLAYLIST_FALLBACK = "assets/playlist_fallback.png"
-LIKED_PLAYLIST_FALLBACK = "assets/liked_playlist_fallback.png"
+PLAYLIST_FALLBACK = "assets/playlist_default.png"
+LIKED_PLAYLIST_FALLBACK = "assets/liked_playlist.png"
 PROFILE_PICTURES_DIR = "profile_pictures"
 PLAYLIST_PICTURE_DIR = "covers"
 
