@@ -221,7 +221,7 @@ def get_profile_picture(user_id : str):
 @app.get("/cover/playlist/{playlist_id}")
 def get_playlist_cover(playlist_id: str):
     path = COVER_DB.get(playlist_id)
-    if playlist_id == LIKED_PLAYLIST_ID:
+    if playlist_id.lower() == LIKED_PLAYLIST_ID.lower():
         return _get_liked_playlist_cover()
     if not path or not os.path.isfile(path):
         return _get_playlist_fallback_image()
@@ -244,7 +244,7 @@ def _get_playlist_fallback_image():
     return Response(content=data, media_type="image/jpeg")
 
 def _get_liked_playlist_cover():
-    if not os.path.isfile(PLAYLIST_FALLBACK):
+    if not os.path.isfile(LIKED_PLAYLIST_FALLBACK):
         raise HTTPException(status_code=500, detail="Fallback image not found")
     with open(PLAYLIST_FALLBACK, "rb") as f:
         data = f.read()
