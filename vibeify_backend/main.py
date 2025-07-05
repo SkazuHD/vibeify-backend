@@ -155,32 +155,57 @@ def init_picture_db():
         print_d(f"Loaded profile picture for {user_id}: {file}")
 
 
+
 def scan_and_upload(base_dir="media"):
-    print_d("📡 Scanning media directory...")
+    print("📡 Scanning media directory...")
     base = Path(base_dir)
     songs_ref = db.collection(COLLECTION)
+    
+    # Load existing songs from Firestore first (if not forcing)
+    existing_songs = set()
+    if not FORCE:
+        print_d("📥 Loading existing songs from Firestore...")
+        try:
+            docs = songs_ref.stream()
+            for doc in docs:
+                existing_songs.add(doc.id)
+            print_d(f"📥 Found {len(existing_songs)} existing songs in Firestore")
+        except Exception as e:
+            print_d(f"❌ Error loading from Firestore: {e}")
 
+    # Single file system scan
+    uploaded_count = 0
+    skipped_count = 0
+    error_count = 0
+    
     for file in base.rglob("*.mp3"):
         file_path = str(file)
         try:
             song_id = generate_stable_id(file_path)
+            
+            SONG_DB[song_id] = file_path
 
-            # 🔍 Check if already in Firestore (skip if FORCE is disabled)
-            if not FORCE and songs_ref.document(song_id).get().exists:
+            # Check if already in Firestore (skip if FORCE is disabled)
+            if not FORCE and song_id in existing_songs:
                 print_d(f"⏩ Skipping already uploaded: {file_path} ({song_id})")
-                SONG_DB[song_id] = file_path  # still add to local cache!
+                skipped_count += 1
                 continue
 
             metadata = extract_metadata(file_path)
-            SONG_DB[song_id] = file_path
+            songs_ref.document(song_id).set(metadata)
             
-            if FORCE:
-                songs_ref.document(song_id).set(metadata)
+            if FORCE and song_id in existing_songs:
                 print_d(f"🔄 Force updated: {metadata['name']}")
+            else:
+                print_d(f"📤 Uploaded new song: {metadata['name']}")
+            
+            uploaded_count += 1
 
         except Exception as e:
-            print_d(f"❌ Error processing {file_path}: {e}")
-    print_d( "📡 Media scan complete!")
+            error_count += 1
+            print(f"❌ Error processing {file_path}: {e}")
+
+    print(f"📡 Media scan complete! Uploaded: {uploaded_count}, Skipped: {skipped_count}, Errors: {error_count}")
 
 
 @app.get("/", response_model=dict)
@@ -259,41 +284,15 @@ def stream_song(song_id: str):
 
 @app.on_event("startup")
 def on_startup():
-    if not FORCE:
-        load_existing_songs_from_firestore()
     scan_and_upload()
     init_picture_db()
     init_cover_db()
 
 def start():
-    if not FORCE:
-        load_existing_songs_from_firestore()
     scan_and_upload()
     init_picture_db()
     init_cover_db()
     """Launched with `poetry run start` at root level"""
     uvicorn.run("vibeify_backend.main:app", host="0.0.0.0", port=8000, reload=True)
 
-def load_existing_songs_from_firestore():
-    """Load existing songs from Firestore into local cache without re-uploading"""
-    print_d("📥 Loading existing songs from Firestore...")
-    songs_ref = db.collection(COLLECTION)
-    docs = songs_ref.stream()
-    
-    count = 0
-    for doc in docs:
-        song_data = doc.to_dict()
-        song_id = doc.id
-        
-        # Try to find the local file path
-        # This is a simple approach - you might want to improve this based on your file structure
-        base = Path("media")
-        for file in base.rglob("*.mp3"):
-            file_path = str(file)
-            if generate_stable_id(file_path) == song_id:
-                SONG_DB[song_id] = file_path
-                count += 1
-                break
-    
-    print_d(f"📥 Loaded {count} existing songs from Firestore")
 
